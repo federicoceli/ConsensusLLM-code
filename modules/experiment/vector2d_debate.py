@@ -89,9 +89,9 @@ class Vector2dDebate(Template):
         if args.n_stubborn + args.n_suggestible > self._n_agents:
             raise ValueError("stubborn + suggestible agents is more than "
                              f"{self._n_agents}")
-        if len(api_keys) < self._n_agents * args.n_exp:
-            raise ValueError("api_keys are not enough for "
-                             f"{self._n_agents} agents")
+        # if len(api_keys) < self._n_agents * args.n_exp:
+        #     raise ValueError("api_keys are not enough for "
+        #                      f"{self._n_agents} agents")
         if self._m.shape[0] != self._m.shape[1]:
             raise ValueError("connectivity_matrix is not a square matrix, "
                              f"shape: {self._m.shape}")
@@ -116,7 +116,7 @@ class Vector2dDebate(Template):
             position_others = [(x, y) for x, y in position[self._m[idx, :]]]
             agent = Agent2D(position=tuple(position[idx]),
                             other_position=position_others,
-                            key=api_keys[simulation_ind * self._n_agents + idx],
+                            key=os.getenv("OPENAI_KEY"), # assuming key is stored as ```export OPENAI_KEY="your-key-here"````
                             model="gpt-3.5-turbo-0613",
                             name=names[idx])
             # add personality, neutral by default

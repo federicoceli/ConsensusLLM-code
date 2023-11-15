@@ -34,6 +34,7 @@ from ..prompt.form import agent_output_form
 from ..prompt.personality import stubborn, suggestible
 from ..visual.gen_html import gen_html
 from ..visual.plot import plot_result
+import os
 
 class ScalarDebate(Template):
     """
@@ -69,9 +70,9 @@ class ScalarDebate(Template):
         if args.n_stubborn + args.n_suggestible > self._n_agents:
             raise ValueError("stubborn + suggestible agents exceed "
                              f"total agents: {self._n_agents}")
-        if len(api_keys) < self._n_agents * args.n_exp:
-            raise ValueError("api_keys are not enough for "
-                             f"{self._n_agents} agents")
+        # if len(api_keys) < self._n_agents * args.n_exp:
+        #     raise ValueError("api_keys are not enough for "
+        #                      f"{self._n_agents} agents")
         if self._m.shape[0] != self._m.shape[1]:
             raise ValueError("connectivity_matrix is not a square matrix, "
                              f"shape: {self._m.shape}")
@@ -97,8 +98,8 @@ class ScalarDebate(Template):
             # Create agent instances
             agent = Agent(position=position[idx],
                           other_position=position_others,
-                          key=api_keys[simulation_ind * self._n_agents + idx],
-                          model="gpt-3.5-turbo-0613",
+                          key=os.getenv("OPENAI_KEY"), # assuming key is stored as ```export OPENAI_KEY="your-key-here"````
+                          model="gpt-3.5-turbo-1106",
                           name=names[idx])
 
             # Add personality, neutral by default

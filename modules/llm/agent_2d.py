@@ -125,6 +125,7 @@ class Agent2D(GPT):
         """
         try:
             answer = self.generate_answer(input=input, try_times=try_times)
+            print(answer)
             self._target_position = self.parse_output(answer)
             self._target_trajectory.append(self._target_position)
             return idx, self._target_position

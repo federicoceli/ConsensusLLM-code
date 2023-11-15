@@ -178,6 +178,8 @@ class Template(ABC):
                                        .submit(agent.answer, question, 
                                                agent_ind, round, 
                                                simulation_ind))
+                        # print(f"Round {round}, Agent {agent_ind}, "
+                        #       f"Question: {question}")
 
                     for ind, future in enumerate(as_completed(futures)):
                         if future.exception() is not None:

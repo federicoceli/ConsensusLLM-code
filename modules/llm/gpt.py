@@ -131,6 +131,7 @@ class GPT:
                 model=self._model,
                 messages=self._memories,
                 temperature=self._temperature,
+                request_timeout=15,  
                 **kwargs
             )
             self._cost += response['usage']["total_tokens"]

@@ -94,6 +94,7 @@ class Agent(GPT):
         """
         try:
             answer = self.generate_answer(input=input, try_times=try_times)
+            # print(answer)
             self.position = self.parse_output(answer)
             return idx, self.position
         except Exception as e:

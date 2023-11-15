@@ -55,7 +55,7 @@ if __name__ == "__main__":
     log_directory = os.path.dirname(
         os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-    category = 'log/scalar_debate/n_agents3_rounds9_n_exp3_2023-10-07_16-38.p'
+    category = 'log/scalar_debate/n_agents3_rounds9_n_exp2_2023-11-14_10-34'
     directory_path = os.path.join(log_directory, category)
 
     files = [os.path.join(directory_path, file) 

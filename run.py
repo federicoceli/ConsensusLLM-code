@@ -40,5 +40,5 @@ if __name__ == "__main__":
         [True, False, False],
       ]
     )
-  exp = debate_factory("2d", args, connectivity_matrix=m)
+  exp = debate_factory("scalar", args, connectivity_matrix=m)
   exp.run()

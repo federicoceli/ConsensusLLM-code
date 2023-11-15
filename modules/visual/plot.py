@@ -92,21 +92,22 @@ def plot_single(data_path, pic_dir, name):
     # plt.xticks(fontsize=20)
     # plt.yticks(fontsize=20)
     # Legend handling
-    if agent_count >= 8:
-        legend = plt.legend(loc='center left', bbox_to_anchor=(1.05, 0.5), fontsize='small')
-    else:
+    # if agent_count >= 8:
+    #     legend = plt.legend(loc='center left', bbox_to_anchor=(1.05, 0.5), fontsize='small')
+    # else:
         # legend = plt.legend(loc='upper right', )
         # legend = plt.legend(loc='lower right', )
         # legend = plt.legend(loc='center right', )
         # legend = plt.legend(fontsize='25')
-        legend = plt.legend()
+        # legend = plt.legend()
 
     plt.tight_layout()
-    frame = legend.get_frame()
+    #frame = legend.get_frame()
     frame.set_alpha(0.75)
     # frame.set_facecolor()
 
     plt.savefig(pic_dir + f'/svg/result_{name}.svg')
+    plt.legend().remove() 
     plt.show()
 
 
@@ -137,7 +138,7 @@ def plot_result(data_path, pic_dir):
             ax.set_ylim(0, 100)
             ax.set_xlim(0, len(res) - 1)
             ax.xaxis.set_major_locator(MaxNLocator(integer=True))
-            ax.legend()
+            # ax.legend()
 
     # Add vertical dashed lines for each round to all subplots
     for ax in axes.flatten():
@@ -147,6 +148,7 @@ def plot_result(data_path, pic_dir):
     # Adjust layout to prevent subplot overlap
     plt.tight_layout()
     # plt.savefig(pic_dir + '/result.svg', format='svg')
+    plt.legend().remove()  
     plt.savefig(pic_dir + '/result.png')
     # Show the plot
     plt.show()

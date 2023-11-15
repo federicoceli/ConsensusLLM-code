@@ -60,6 +60,11 @@ def plot_xy(data_path):
         data_path (str): The path to the data file containing trajectory data.
     """
     data = read_from_file(data_path)
+    print(data)
+    print('====================')
+    print(data['target'][0])
+    print('====================')
+    print(data['target'])
     all_positions = np.array(data['pos'][0])
     all_targets = np.array(data['target'][0])
 

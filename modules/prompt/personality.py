@@ -25,7 +25,7 @@ THE SOFTWARE.
 
 personality = ["",
                "",
-               "You are an extremely stubborn person, prefer to remain stationary.",
+               "You are an extremely stubborn person, and you ALWAYS remain stationary.",
                "You are an extremely suggestible person, prefer to move to someone else's position.",
                "You are a person who is extremely susceptible to the influence of others, prefer to move to someone else's position.",
                "You are very selfish.",

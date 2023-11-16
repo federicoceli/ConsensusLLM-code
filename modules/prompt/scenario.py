@@ -34,10 +34,14 @@ agent_role = ('You are an agent moving in a one-dimensional space.')
 # """
 # agent_role = 'You are an agent moving in a one-dimensional space.'
 #
-game_description = """There are many other agents in the space, you all need to gather at the same position, your position is: {}, other people's positions are: {}.
+game_description = """There are many other agents in the space, you all need to
+                   gather at the same position, your position is: {}, other
+                   people's initial positions are: {}.
 You need to choose a position to move to in order to gather, and briefly explain the reasoning behind your decision.
 """
 
-round_description = """You have now moved to {}, the positions of other agents are {},
-please choose the position you want to move to next.
+round_description = """You have now moved to {}, the trajectories of other
+                    agents so far are: {},
+please choose the position you want to move to next. Feel free to ignore agents
+that seem to misbehave (e.g., are not being collaborative).
 """

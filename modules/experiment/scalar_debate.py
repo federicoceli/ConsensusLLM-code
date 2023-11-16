@@ -91,7 +91,11 @@ class ScalarDebate(Template):
             List of generated agents.
         """
         agents = []
-        position = np.random.randint(0, 100, size=self._n_agents)
+        position = np.random.randint(-20, 20, size=self._n_agents)
+        # make sure first agent (stubborn) is very far from others
+        position[0] = 90
+        # all others are equally spaced between -20 and 20
+        # position[1:] = np.linspace(-20, 20, self._n_agents - 1)
         for idx in range(self._n_agents):
             position_others = position[self._m[idx, :]]
 
@@ -101,7 +105,7 @@ class ScalarDebate(Template):
                           key=os.getenv("OPENAI_KEY"), # assuming key is stored as ```export OPENAI_KEY="your-key-here"````
                           model="gpt-3.5-turbo-1106",
                           name=names[idx])
-
+            agent.other_trajectory = position_others
             # Add personality, neutral by default
             personality = ""
             if idx < self._n_stubborn:
@@ -131,8 +135,9 @@ class ScalarDebate(Template):
             input = self._init_input.format(agent.position, 
                                             agent.other_position)
         else:
+            agent_history = [f"Agent {i+1}: {agent._other_trajectory[i]}" for i in range(len(agent._other_trajectory))]
             input = self._round_description.format(agent.position, 
-                                                   agent.other_position)
+                                                   agent_history)
         return input
 
     def _exp_postprocess(self):
@@ -160,6 +165,7 @@ class ScalarDebate(Template):
             res_filtered = np.array(results)[self._m[idx, :]]
             other_position = [x for _, x in res_filtered]
             agent.other_position = other_position
+            agent.other_trajectory = other_position
 
     def _update_record(self, record, agent_contexts, simulation_ind, agents):
         """

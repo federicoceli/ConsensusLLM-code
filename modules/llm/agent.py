@@ -41,12 +41,13 @@ class Agent(GPT):
         temperature (float): 
             GPT temperature for text generation (default is 0.7).
     """
-    def __init__(self, position, other_position, key: str, name=None, 
+    def __init__(self, position, other_position, key: str, name=None,
                  model: str = 'gpt-3.5-turbo-0613', temperature: float = 0.7):
         super().__init__(key=key, model=model, temperature=temperature)
         self._name = name
         self._position = position  # Current position of the agent
         self._other_position = other_position  # Positions of other agents
+        self._other_trajectory = [[] for _ in range(len(other_position))]
         self._trajectory = [self.position]  # Record the agent's movement trajectory
         self._summarizer = GPT(key=key, model="gpt-3.5-turbo-0613", 
                                keep_memory=False)
@@ -61,6 +62,10 @@ class Agent(GPT):
     @property
     def position(self):
         return self._position
+    
+    @property
+    def trajectory(self):
+        return self._trajectory
 
     @position.setter
     def position(self, value):
@@ -69,10 +74,19 @@ class Agent(GPT):
     @property
     def other_position(self):
         return self._other_position
+    
+    @property
+    def other_trajectory(self):
+        return self._other_trajectory
 
     @other_position.setter
     def other_position(self, value):
         self._other_position = value
+
+    @other_trajectory.setter
+    def other_trajectory(self, value):
+        for i in range(len(value)):
+            self._other_trajectory[i].append(value[i])
 
     @property
     def summarize_result(self):
